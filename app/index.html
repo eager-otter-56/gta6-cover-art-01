@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VICE FRAME — Cover Art Studio</title>
+<meta name="description" content="Turn your photos into multi-panel, sunset-graded poster covers with bold lettering. Offline, in your browser, exported as PNG.">
+<meta name="theme-color" content="#0c0c13">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff7ae'/%3E%3Cstop offset='.55' stop-color='%23ffb347'/%3E%3Cstop offset='1' stop-color='%23ff5e8a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='12' fill='%230c0c13'/%3E%3Ctext x='32' y='44' font-family='Arial Black, sans-serif' font-size='28' font-weight='900' fill='url(%23g)' text-anchor='middle'%3EVF%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">VICE FRAME</span>
+      <span class="brand-sub">COVER ART STUDIO</span>
+    </div>
+    <p id="status" class="status" role="status"></p>
+  </header>
+
+  <main class="layout">
+    <aside class="controls">
+      <section class="control-block">
+        <h2>1 · Photos</h2>
+        <label class="upload-btn">
+          Add your photos
+          <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        </label>
+        <p class="note">Or start with a built-in sample:</p>
+        <div id="sampleRow" class="chip-row"></div>
+        <div id="tray" class="tray"></div>
+        <label class="check"><input id="applyAll" type="checkbox"> One photo fills every panel</label>
+      </section>
+
+      <section class="control-block">
+        <h2>2 · Panel framing</h2>
+        <p id="panelInfo" class="note"></p>
+        <label class="slider-label">Zoom
+          <input id="zoom" type="range" min="1" max="3" step="0.01" value="1">
+        </label>
+        <button id="resetView" type="button" class="ghost-btn">Reset panel framing</button>
+      </section>
+
+      <section class="control-block">
+        <h2>3 · Layout</h2>
+        <div id="layoutRow" class="chip-row"></div>
+      </section>
+
+      <section class="control-block">
+        <h2>4 · Canvas size</h2>
+        <div id="aspectRow" class="chip-row"></div>
+      </section>
+
+      <section class="control-block">
+        <h2>5 · Colour grade</h2>
+        <div id="gradeRow" class="chip-row"></div>
+      </section>
+
+      <section class="control-block">
+        <h2>6 · Lettering</h2>
+        <label class="field">Title line 1
+          <input id="title1" type="text" maxlength="18" autocomplete="off">
+        </label>
+        <label class="field">Title line 2
+          <input id="title2" type="text" maxlength="18" autocomplete="off">
+        </label>
+        <label class="field">Subtitle / caption
+          <input id="subtitle" type="text" maxlength="42" autocomplete="off">
+        </label>
+        <label class="field">Title colourway
+          <select id="styleSelect"></select>
+        </label>
+        <label class="check"><input id="captionBar" type="checkbox"> Caption bar</label>
+      </section>
+
+      <section class="control-block">
+        <h2>7 · Export PNG</h2>
+        <div class="export-row">
+          <button id="expSquare" type="button" class="export-btn">1080 × 1080</button>
+          <button id="expPortrait" type="button" class="export-btn">1080 × 1350</button>
+          <button id="expWide" type="button" class="export-btn">1920 × 1080</button>
+        </div>
+        <p class="note">Exports render at full size, with the layout matched to each aspect.</p>
+      </section>
+
+      <footer class="fineprint">
+        Everything runs locally in your browser — photos never leave this machine.
+        Lettering is set in Anton (SIL Open Font License 1.1). All artwork is original.
+      </footer>
+    </aside>
+
+    <section id="stage" class="stage">
+      <canvas id="preview" width="920" height="518"></canvas>
+      <p class="hint">Drop photos on the cover · click a panel to select it · drag to reposition · scroll to zoom</p>
+    </section>
+  </main>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
